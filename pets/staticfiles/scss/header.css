@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+#signup-modal .modal-dialog .container-fluid {
+  margin: 0 auto;
+}
+
+.modal-footer {
+  background-color: #e9ecef;
+}
+
+#prMismatchPasswordError {
+  display: none;
+  color: #e34439;
+}
+
+#prMismatchPasswordError.show {
+  display: block;
+}
+
+.navbar {
+  font-weight: 400;
+  background-color: #fc813a;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #111;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navbar-nav .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.container-fluid {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.top-menu li a::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-color: #111;
+  height: 1px;
+  transition: all 0.3s;
+  transform: scale(0);
+}
+
+.top-menu li a:hover::after {
+  transform: scale(1);
+}
+
+/*# sourceMappingURL=header.css.map */

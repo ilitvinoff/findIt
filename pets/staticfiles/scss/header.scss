@@ -1,0 +1,38 @@
+@import "fonts";
+@import "colors";
+@import "signup";
+
+.navbar {
+  font-weight: map-get($font-weights, "reg");
+  background-color: $header-bg;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $font-color;
+  font-weight: map-get($font-weights, "bold");
+  text-transform: uppercase;
+}
+
+.navbar-nav .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.container-fluid {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.top-menu li a::after {
+	content: '';
+	display: block;
+	width: 100%;
+	background-color: $font-color;
+	height: 1px;
+	transition: all .3s;
+	transform: scale(0);
+}
+
+.top-menu li a:hover::after {
+	transform: scale(1);
+}

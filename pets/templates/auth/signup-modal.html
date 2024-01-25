@@ -1,0 +1,64 @@
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="container-fluid">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ "create new account"|title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="signup-form" method="post" action={% url "signup" %}>
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="{{ form.username.id_for_label }}" class="col-form-label"></label>
+                            <input autocomplete="nickname" type="text" class="form-control" placeholder="Username" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" {% if form.username.value != None %}value="{{ form.username.value }}"{% endif %}>
+                            {{ form.username.errors }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="col-form-label">*</label>
+                            <input autocomplete="username" type="email" class="form-control" placeholder="Email" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" {% if form.username.value != None %}value="{{ form.email.value }}"{% endif %}>
+                            {{ form.email.errors }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.password.id_for_label }}" class="col-form-label">*</label>
+                            <div class="input-group flex-nowrap mb-3">
+                                <input type="password" autocomplete="new-password" class="form-control password" placeholder="Password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}">
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}" style="cursor: pointer"></i>
+                                </span>
+                                {{ form.password.errors }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.password.id_for_label }}_confirm" class="col-form-label">*</label>
+                            <div class="input-group flex-nowrap">
+                                <input type="password" autocomplete="new-password" class="form-control password" placeholder="Confirm password" id="{{ form.password.id_for_label }}_confirm" name="{{ form.password.name }}_confirm">
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}_confirm" style="cursor: pointer"></i>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div id="prMismatchPasswordError" class="mb-3">
+                            <p class="modal-window-body-mismatch-password-error-title">Password mismatch</p>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="id_submit_signup" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

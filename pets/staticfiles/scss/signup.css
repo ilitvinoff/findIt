@@ -1,0 +1,14 @@
+#signup-modal .modal-dialog .container-fluid {
+  margin: 0 auto;
+}
+
+#prMismatchPasswordError {
+  display: none;
+  color: #e34439;
+}
+
+#prMismatchPasswordError.show {
+  display: block;
+}
+
+/*# sourceMappingURL=signup.css.map */

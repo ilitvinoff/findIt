@@ -1,0 +1,22 @@
+@import "colors";
+
+#signup-modal {
+  .modal-dialog {
+    .container-fluid {
+      margin: 0 auto;
+    }
+  }
+}
+
+.modal-footer {
+  background-color: $bg-footer-color;
+}
+
+#prMismatchPasswordError {
+  display: none;
+  color: $alert;
+}
+
+#prMismatchPasswordError.show {
+  display: block;
+}
