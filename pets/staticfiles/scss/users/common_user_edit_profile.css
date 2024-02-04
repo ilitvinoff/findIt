@@ -1,0 +1,31 @@
+.main-content {
+  margin-top: 2.5rem;
+}
+
+.profile-picture {
+  height: 300px;
+}
+.profile-picture image {
+  height: auto;
+  width: 100%;
+  border-radius: 50%;
+}
+.profile-picture image:hover {
+  cursor: pointer;
+  position: relative;
+}
+.profile-picture image:hover:after {
+  content: " ";
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-size: 50% auto;
+  background-repeat: no-repeat;
+  background-image: url("/static/assets/images/light-camera-icon.svg");
+}
+
+/*# sourceMappingURL=common_user_edit_profile.css.map */

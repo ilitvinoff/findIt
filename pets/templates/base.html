@@ -31,13 +31,15 @@
     {% block extra_meta %}
     {% endblock %}
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 {% block header %}
     {% include "header.html" %}
 {% endblock %}
 
-{% block main %}
-{% endblock %}
+<div class="base-container">
+    {% block main %}
+    {% endblock %}
+</div>
 
 {% block footer %}
 

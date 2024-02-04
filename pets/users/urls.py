@@ -9,4 +9,6 @@ urlpatterns = [
                                                 next_page=(reverse_lazy('homepage')),
                                                 template_name="auth/signin-modal.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page=reverse_lazy('homepage')), name='logout'),
+    path("profile/edit/", views.EditProfileView.as_view(), name='edit-profile'),
+    path("profile/<int:pk>", views.UserProfileView.as_view(), name='profile'),
 ]

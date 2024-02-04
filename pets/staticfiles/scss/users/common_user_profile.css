@@ -1,0 +1,14 @@
+.main-content {
+  margin-top: 2.5rem;
+}
+
+.profile-picture {
+  height: 300px;
+}
+.profile-picture img {
+  height: 100%;
+  width: auto;
+  border-radius: 50%;
+}
+
+/*# sourceMappingURL=common_user_profile.css.map */

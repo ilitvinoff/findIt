@@ -31,10 +31,11 @@
   right: 0;
   left: auto;
 }
-
-.container-fluid {
-  max-width: 1280px;
-  margin: 0 auto;
+.navbar-nav .header-avatar img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  box-shadow: 0 1rem 3rem rgba(17, 17, 17, 0.3);
 }
 
 .top-menu li a::after {

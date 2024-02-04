@@ -18,7 +18,7 @@ media
 develop-eggs/
 dist/
 static/*
-openmic/static/*
+pets/static/*
 downloads/
 eggs/
 .eggs/
@@ -62,6 +62,7 @@ venv.bak/
 .vscode
 app/storage/*
 /scripts/
+.pylintrc
 
 docker-compose-postgresql.yml
 pgdata

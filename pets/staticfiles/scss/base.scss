@@ -28,7 +28,7 @@ main {
 
 .btn-primary {
   background-color: $btn-primary-color;
-  color: $font-color;
+  color: $bg-color;
   border: none;
 
   &:hover {
@@ -39,7 +39,7 @@ main {
 
 .btn-secondary {
   background-color: $btn-secondary-color;
-  color: $font-color;
+  color: $bg-color;
   border: none;
 
   &:hover {
@@ -50,4 +50,9 @@ main {
 
 .modal-content {
   background-color: $bg-color;
+}
+
+.base-container {
+  max-width: 1280px;
+  margin: 0 auto;
 }

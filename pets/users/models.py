@@ -1,9 +1,11 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager, Group
 from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from core.models import CoreModel
+from core.utils import get_storage_path
 
 
 class CustomUserManager(UserManager):
@@ -47,8 +49,11 @@ class User(AbstractBaseUser, PermissionsMixin, CoreModel):
     base_type = Types.COMMON
 
     email = models.EmailField(_("Email"), blank=False, null=False, unique=True)
-    username = models.EmailField(_("Username"), blank=False, null=True, unique=True)
     type = models.IntegerField(_("Type"), choices=Types.choices)
+
+    username = models.EmailField(_("Username"), blank=False, null=True, unique=True)
+    phone_number = models.CharField(_("Phone number"), blank=False, null=True, default=None, max_length=20)
+    image = models.ImageField(upload_to=get_storage_path, blank=True, null=False)
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
@@ -63,6 +68,15 @@ class User(AbstractBaseUser, PermissionsMixin, CoreModel):
         if not self.pk:
             self.type = self.base_type
         return super(User, self).save(*args, **kwargs)
+
+    def get_image(self):
+        try:
+            if self.image is not None and self.image.url is not None:
+                return self.image.url
+        except ValueError:
+            pass
+
+        return f"{settings.STATIC_URL}assets/images/User_photo.jpg"
 
 
 class RegularUserManager(UserManager):

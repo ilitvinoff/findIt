@@ -13,14 +13,18 @@
   text-transform: uppercase;
 }
 
-.navbar-nav .dropdown-menu {
-  right: 0;
-  left: auto;
-}
+.navbar-nav {
+	.dropdown-menu {
+		right: 0;
+		left: auto;
+	}
 
-.container-fluid {
-  max-width: 1280px;
-  margin: 0 auto;
+	.header-avatar img{
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 50%;
+		box-shadow: 0 1rem 3rem $shadow-primary-color;
+	}
 }
 
 .top-menu li a::after {
