@@ -1,6 +1,6 @@
 from django.http import HttpResponseServerError
 from django.views import generic
-from django.contrib.auth import login, get_user_model, logout
+from django.contrib.auth import login, get_user_model, logout, views as auth_views
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 
@@ -66,6 +66,21 @@ class UserProfileView(generic.TemplateView):
             return HttpResponseServerError()
 
         return super(UserProfileView, self).dispatch(request, *args, **kwargs)
+
+
+class UserLoginView(auth_views.LoginView):
+    template_name = "auth/signin-modal.html"
+    next_page = reverse_lazy('homepage')
+    redirect_authenticated_user = True
+
+    def form_valid(self, form):
+        auth_views.auth_login(self.request, form.get_user())
+        self.template_name = "auth/partials/success-sign-in.html"
+        return self.render_to_response(None)
+
+    def form_invalid(self, form):
+        self.template_name = "auth/partials/sign-in-form.html"
+        return super(UserLoginView, self).form_invalid(form)
 
 
 class EditProfileView(generic.TemplateView):

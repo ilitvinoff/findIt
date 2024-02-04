@@ -53,4 +53,9 @@ main {
   margin: 0 auto;
 }
 
+.error-block {
+  font-size: 14px;
+  color: #e34439;
+}
+
 /*# sourceMappingURL=base.css.map */
