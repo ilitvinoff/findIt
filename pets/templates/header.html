@@ -55,8 +55,6 @@
                         {% include 'auth/signin-modal.html' %}
                         {# here the modal window with signup form is rendered dynamicaly on load event #}
                         <div id="signup-modal" class="modal fade" tabindex="-1" hx-get="{% url "signup" %}" hx-trigger="load"></div>
-
-                        <script src="{% static "js/auth.js" %}"></script>
                     {% endif %}
 
                     <li class="nav-item d-flex justify-content-center align-items-center">
