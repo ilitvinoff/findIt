@@ -2,19 +2,27 @@
   margin-top: 2.5rem;
 }
 
+#id_image_form_input {
+  display: none;
+}
+
 .profile-picture {
   height: 300px;
+  width: 300px;
+  padding: 0;
+  max-width: none;
 }
-.profile-picture image {
-  height: auto;
+.profile-picture img {
+  height: 100%;
   width: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
-.profile-picture image:hover {
+.profile-picture:hover {
   cursor: pointer;
   position: relative;
 }
-.profile-picture image:hover:after {
+.profile-picture:hover:after {
   content: " ";
   position: absolute;
   display: block;
@@ -26,6 +34,19 @@
   background-size: 50% auto;
   background-repeat: no-repeat;
   background-image: url("/static/assets/images/light-camera-icon.svg");
+  border-radius: 50%;
+}
+
+.input-block {
+  min-width: 300px;
+  width: 100%;
+}
+.input-block input {
+  min-width: 200px;
+}
+.input-block label {
+  min-width: 100px;
+  padding-left: 10px;
 }
 
 /*# sourceMappingURL=common_user_edit_profile.css.map */

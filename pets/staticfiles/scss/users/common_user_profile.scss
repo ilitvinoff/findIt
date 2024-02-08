@@ -1,14 +1,17 @@
-.main-content{
-  margin-top: 2.5rem ;
+.main-content {
+  margin-top: 2.5rem;
 }
 
 .profile-picture {
   height: 300px;
+  width: 300px;
+  padding: 0;
 
   img {
     height: 100%;
-    width: auto;
+    width: 100%;
     border-radius: 50%;
+    object-fit: cover;
   }
 }
 

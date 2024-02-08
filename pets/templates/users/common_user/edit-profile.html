@@ -3,85 +3,84 @@
 
 {% block extra_meta %}
     <link rel="stylesheet" href="{% static "/scss/users/common_user_edit_profile.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"/>
 {% endblock %}
 
 {% block main %}
     <div class="container main-content">
-        <div class="row row-cols-md-3 justify-content-start">
-            <div class="col profile-picture">
-                <img class="avatar avatar-xxl m-auto" src="{{ profile.get_image }}"/>
+
+        <form class="row row-cols-md-3 justify-content-start" method="post" action="{% url "edit-profile" %}"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {# Image block       #}
+            <input type="file" id="id_image_form_input" name="image" accept="image/*">
+            <div class="profile-picture">
+                <img class="m-auto" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
+                     src="{{ user.get_image }}" alt="User Photo"/>
             </div>
 
-            <div class="col user-data ms-5 mt-5">
+            {% include 'users/common_user/modal/image-cropper-modal.html' %}
 
-                {# USERNAME #}
-                <div class="row">
+            {# User personal data block           #}
+            <div class="col user-data ms-5 mt-5">
+                {# EMAIL #}
+                <div class="row mt-1">
                     <div class="col">
                         <h6 class="d-inline">
-                            <small class="text-muted">Username:</small>
+                            <small class="text-muted">Email:</small>
                         </h6>
                         <div class="email d-inline">
-                            {{ profile.username }}
+                            {{ user.email }}
                         </div>
                     </div>
                 </div>
 
-                {% if  show_contacts %}
-                    {# EMAIL #}
-                    <div class="row mt-1">
-                        <div class="col">
-                            <h6 class="d-inline">
-                                <small class="text-muted">Email:</small>
-                            </h6>
-                            <div class="email d-inline">
-                                {{ profile.email }}
-                            </div>
+                <div class="edit-block mt-4">
+                    {# USERNAME #}
+                    <div class="row input-block">
+                        <div class="error">
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="col d-inline-flex align-items-center">
+                            <label for="id_username_input" class="h6 form-label">
+                                <small class="text-muted">Username:</small>
+                            </label>
+
+                            <input id="id_username_input" type="text" {% if form.username.value %}
+                                   value="{{ form.username.value }}" {% endif %} class="form-control"
+                                   placeholder="Username" aria-label="Username" name="username">
                         </div>
                     </div>
 
                     {# PHONE #}
-                    <div class="row mt-1">
-                        <div class="col">
-                            <h6 class="d-inline">
+                    <div class="row mt-1 input-block">
+                        <div class="error">
+                            {{ form.phone_number.errors }}
+                        </div>
+                        <div class="col d-inline-flex align-items-center">
+                            <label for="id_phone_input" class="h6 form-label">
                                 <small class="text-muted">Phone:</small>
-                            </h6>
-                            <div class="email d-inline">
-                                {% if profile.phone_number is not None %}
-                                    {{ profile.phone_number }}
-                                {% endif %}
-                            </div>
+                            </label>
+
+                            <input id="id_phone_input" type="text" {% if form.phone_number.value %}
+                                   value="{{ form.phone_number.value }}" {% endif %} class="form-control"
+                                   placeholder="Phone" aria-label="Phone" name="phone_number">
                         </div>
                     </div>
-                {% endif %}
-
-                <a class="btn btn-outline-danger mt-5" href="#" role="button" data-bs-toggle="modal"
-                   data-bs-target="#deleteProfileModal">Delete Profile</a>
-                <a class="btn btn-primary mt-5" href="#" role="button">Edit Profile</a>
-
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProfileModalLabel">Delete Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    Are you sure you want to delete your account?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger" hx-delete="{% url 'profile' user.pk %}">
-                        Delete
-                    </button>
+
+                <div class="button-block">
+                    <a class="btn btn-secondary mt-5" href="{% url "profile" pk=user.id %}" role="button">Cancel</a>
+                    <button class="btn btn-primary mt-5" type="submit" role="button">Save Changes</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 {% endblock %}

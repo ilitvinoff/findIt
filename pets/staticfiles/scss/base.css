@@ -17,7 +17,7 @@ a {
 }
 
 a:hover {
-  color: #7a8c92;
+  color: #adc2c8;
 }
 
 main {
@@ -35,7 +35,7 @@ main {
 }
 
 .btn-secondary {
-  background-color: #7a8c92;
+  background-color: #adc2c8;
   color: azure;
   border: none;
 }
@@ -46,6 +46,10 @@ main {
 
 .modal-content {
   background-color: azure;
+}
+
+.modal-footer {
+  background-color: #e9ecef;
 }
 
 .base-container {

@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from core.models import CoreModel
 from core.utils import get_storage_path
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 class CustomUserManager(UserManager):
     def _create_user(self, email, password=None, username=None, **extra_fields):
@@ -51,8 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin, CoreModel):
     email = models.EmailField(_("Email"), blank=False, null=False, unique=True)
     type = models.IntegerField(_("Type"), choices=Types.choices)
 
-    username = models.EmailField(_("Username"), blank=False, null=True, unique=True)
-    phone_number = models.CharField(_("Phone number"), blank=False, null=True, default=None, max_length=20)
+    username = models.CharField(_("Username"), blank=False, null=True, unique=True, max_length=30)
+    phone_number = PhoneNumberField(_("Phone number"), blank=False, null=True, default=None, max_length=20)
     image = models.ImageField(upload_to=get_storage_path, blank=True, null=False)
 
     USERNAME_FIELD = "email"
@@ -67,6 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin, CoreModel):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.type = self.base_type
+
         return super(User, self).save(*args, **kwargs)
 
     def get_image(self):
@@ -79,7 +82,7 @@ class User(AbstractBaseUser, PermissionsMixin, CoreModel):
         return f"{settings.STATIC_URL}assets/images/User_photo.jpg"
 
 
-class RegularUserManager(UserManager):
+class RegularUserManager(CustomUserManager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.COMMON)
 
@@ -93,7 +96,7 @@ class CommonUser(User):
         proxy = True
 
 
-class ModeratorUserManager(UserManager):
+class ModeratorUserManager(CustomUserManager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=User.Types.MODERATOR)
 

@@ -5,7 +5,7 @@
 .htmx-request .htmx-indicator {
   width: 100%;
   height: auto;
-  background-color: #7a8c92;
+  background-color: #adc2c8;
   opacity: 0.6;
   display: block;
 }
@@ -13,7 +13,7 @@
 .htmx-request.htmx-indicator {
   width: 100%;
   height: auto;
-  background-color: #7a8c92;
+  background-color: #adc2c8;
   opacity: 0.6;
   display: block;
 }

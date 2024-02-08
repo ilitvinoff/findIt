@@ -52,6 +52,10 @@ main {
   background-color: $bg-color;
 }
 
+.modal-footer {
+  background-color: $bg-footer-color;
+}
+
 .base-container {
   max-width: 1280px;
   margin: 0 auto;

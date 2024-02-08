@@ -1,12 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-#signup-modal .modal-dialog .container-fluid {
-  margin: 0 auto;
-}
-
-.modal-footer {
-  background-color: #e9ecef;
-}
-
 #prMismatchPasswordError {
   display: none;
   color: #e34439;

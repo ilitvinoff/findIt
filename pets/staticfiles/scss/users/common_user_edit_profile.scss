@@ -2,32 +2,57 @@
   margin-top: 2.5rem;
 }
 
+#id_image_form_input {
+  display: none;
+}
+
 .profile-picture {
   height: 300px;
+  width: 300px;
+  padding: 0;
+  max-width: none;
 
-  image {
-    height: auto;
+  img {
+    height: 100%;
     width: 100%;
     border-radius: 50%;
-
-    &:hover {
-      cursor: pointer;
-      position: relative;
-
-      &:after {
-        content: ' ';
-        position: absolute;
-        display: block;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-position: center center;
-        background-size: 50% auto;
-        background-repeat: no-repeat;
-        background-image: url("/static/assets/images/light-camera-icon.svg");
-      }
-    }
+    object-fit: cover;
   }
 
+  &:hover {
+    cursor: pointer;
+    position: relative;
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: 50% auto;
+      background-repeat: no-repeat;
+      background-image: url("/static/assets/images/light-camera-icon.svg");
+      border-radius: 50%;
+    }
+  }
 }
+
+
+.input-block{
+  min-width: 300px;
+  width: 100%;
+  input {
+  min-width: 200px;
+}
+  label {
+  min-width: 100px;
+    padding-left: 10px;
+}
+}
+
+
+
+

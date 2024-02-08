@@ -8,8 +8,8 @@
 {% block main %}
     <div class="container main-content">
         <div class="row row-cols-md-3 justify-content-start">
-            <div class="col profile-picture">
-                <img class="avatar avatar-xxl m-auto" src="{{ profile.get_image }}"/>
+            <div class="profile-picture">
+                <img class="m-auto" src="{{ profile.get_image }}"/>
             </div>
 
             <div class="col user-data ms-5 mt-5">
@@ -20,7 +20,7 @@
                         <h6 class="d-inline">
                             <small class="text-muted">Username:</small>
                         </h6>
-                        <div class="email d-inline">
+                        <div class="username d-inline">
                             {{ profile.username }}
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <h6 class="d-inline">
                                 <small class="text-muted">Phone:</small>
                             </h6>
-                            <div class="email d-inline">
+                            <div class="phone d-inline">
                                 {% if profile.phone_number is not None %}
                                     {{ profile.phone_number }}
                                 {% endif %}

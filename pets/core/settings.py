@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-fn14fw3c+mjs(ay8iio0q^v)@=8s93qg0+7$!44_)y%g!s&gh1"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(util.strtobool(os.getenv("DEBUG", "False")))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # third party
+    "phonenumber_field",
 
     # internal apps
     "users",
@@ -146,3 +147,10 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+
+# PHONE NUMBER SETTINGS
+# https://django-phonenumber-field.readthedocs.io/en/latest/reference.html#settings-format-choices
+PHONENUMBER_DB_FORMAT = os.getenv("PHONENUMBER_DB_FORMAT", "INTERNATIONAL")
+# https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
+PHONENUMBER_DEFAULT_REGION = os.getenv("PHONENUMBER_DEFAULT_REGION", "UA")
