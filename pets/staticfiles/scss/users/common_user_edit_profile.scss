@@ -2,10 +2,6 @@
   margin-top: 2.5rem;
 }
 
-#id_image_form_input {
-  display: none;
-}
-
 .profile-picture {
   height: 300px;
   width: 300px;
@@ -40,19 +36,39 @@
   }
 }
 
+.user-data {
+  min-width: 360px;
+}
 
-.input-block{
+.input-block {
   min-width: 300px;
   width: 100%;
+
   input {
-  min-width: 200px;
-}
+    min-width: 200px;
+  }
+
   label {
-  min-width: 100px;
-    padding-left: 10px;
-}
+    min-width: 100px;
+  }
 }
 
+.modal-body {
+  .crop-container {
+    .src-image-container {
+      max-height: 800px;
+      min-height: 300px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
 
 
 

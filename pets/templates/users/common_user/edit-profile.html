@@ -15,11 +15,13 @@
             {% csrf_token %}
 
             {# Image block       #}
-            <input type="file" id="id_image_form_input" name="image" accept="image/*">
-            <div class="profile-picture">
-                <img class="m-auto" data-bs-toggle="modal" data-bs-target="#imageCropperModal"
-                     src="{{ user.get_image }}" alt="User Photo"/>
-            </div>
+            <input class="d-none" type="text" id="id_crop_data_form_input" name="crop_data">
+            <input class="d-none" type="file" id="id_image_src_input" accept="image/*">
+            <label for="id_image_src_input">
+                <div class="profile-picture">
+                    <img id="id_avatar_representation" class="m-auto" src="{{ user.get_image }}" alt="User Photo"/>
+                </div>
+            </label>
 
             {% include 'users/common_user/modal/image-cropper-modal.html' %}
 
@@ -83,4 +85,5 @@
 
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    <script src="{% static "js/editProfileScript.js" %}"></script>
 {% endblock %}

@@ -2,10 +2,6 @@
   margin-top: 2.5rem;
 }
 
-#id_image_form_input {
-  display: none;
-}
-
 .profile-picture {
   height: 300px;
   width: 300px;
@@ -37,6 +33,10 @@
   border-radius: 50%;
 }
 
+.user-data {
+  min-width: 360px;
+}
+
 .input-block {
   min-width: 300px;
   width: 100%;
@@ -46,7 +46,18 @@
 }
 .input-block label {
   min-width: 100px;
-  padding-left: 10px;
+}
+
+.modal-body .crop-container .src-image-container {
+  max-height: 800px;
+  min-height: 300px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.modal-body .crop-container .src-image-container img {
+  height: 100%;
+  width: 100%;
 }
 
 /*# sourceMappingURL=common_user_edit_profile.css.map */
