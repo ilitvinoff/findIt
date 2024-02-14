@@ -1,5 +1,5 @@
 """
-ASGI config for pets project.
+ASGI config for FindIt project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

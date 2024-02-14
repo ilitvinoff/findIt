@@ -1,5 +1,5 @@
 """
-WSGI config for pets project.
+WSGI config for FindIt project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

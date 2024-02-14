@@ -18,7 +18,7 @@ media
 develop-eggs/
 dist/
 static/*
-pets/static/*
+django_app/static/*
 downloads/
 eggs/
 .eggs/
