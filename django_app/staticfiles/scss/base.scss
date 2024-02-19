@@ -29,7 +29,7 @@ main {
 .btn-primary {
   background-color: $btn-primary-color;
   color: $bg-color;
-  border: none;
+  border-color: unset;
 
   &:hover {
     background-color: $btn-hover;

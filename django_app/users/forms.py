@@ -1,4 +1,5 @@
 import io
+import sys
 
 from PIL import Image
 from django import forms
@@ -49,7 +50,7 @@ class BaseUserEditForm(forms.ModelForm):
         crop_data = cleaned_data.get("crop_data")
 
         required_keys = {"x_offset", "y_offset", "width", "height"}
-        if crop_data or not required_keys.issubset(crop_data.keys()):
+        if not crop_data or not required_keys.issubset(crop_data.keys()):
             crop_data["image"] = None
 
         return cleaned_data
@@ -66,11 +67,10 @@ class BaseUserEditForm(forms.ModelForm):
                  crop_data["x_offset"] + crop_data["width"],
                  crop_data["y_offset"] + crop_data["height"],)
             )
-            buffer = io.BytesIO()
-            file_format = original_image.content_type.split("/")[-1]
-            pil_image.save(buffer, format=file_format)
 
+            buffer = io.BytesIO()
+            pil_image.save(buffer, format=original_image.image.format)
             self.instance.image = InMemoryUploadedFile(
-                buffer, "ImageField", original_image.name, original_image.content_type, buffer.getbuffer().nbytes, None)
+                buffer, "ImageField", original_image.name, original_image.content_type, sys.getsizeof(buffer), None)
 
         super(BaseUserEditForm, self).save(commit)

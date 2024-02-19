@@ -6,7 +6,7 @@ const acceptCropImageButton = document.getElementById("idAcceptCropImageButton")
 const imageCropperModalContainer = document.getElementById('idImageCropperModal');
 const imageCropperBootstrapModalInstance = new bootstrap.Modal(imageCropperModalContainer);
 const IMAGE_MAX_SIDE_LENGTH = 800;
-let cropper;
+let cropper, scaleFactor;
 
 function imageCropperHandler() {
     prepareUploadedImage();
@@ -28,13 +28,13 @@ function acceptCropHandler() {
         let cropData = cropper.getData();
         avatarRepresentation.src = cropImage(imageCropperElement, cropData);
         cropDataFormInput.value = JSON.stringify({
-            "x_offset": cropData.x,
-            "y_offset": cropData.y,
-            "width": cropData.width,
-            "height": cropData.height,
+            "x_offset": cropData.x / scaleFactor,
+            "y_offset": cropData.y / scaleFactor,
+            "width": cropData.width / scaleFactor,
+            "height": cropData.height / scaleFactor,
         })
 
-        sourceImageFileInput.setAttribute("name","image")
+        sourceImageFileInput.setAttribute("name", "image")
         imageCropperBootstrapModalInstance.hide();
     });
 }
@@ -78,7 +78,7 @@ function prepareUploadedImage() {
             imgToResize.onload = resolve;
         });
 
-        let scaleFactor = calculateScaleFactor(imgToResize.width, imgToResize.height)
+        scaleFactor = calculateScaleFactor(imgToResize.width, imgToResize.height)
         if (scaleFactor < 1) {
             imageCropperElement.src = resizeImage(imgToResize, scaleFactor);
         } else {
@@ -114,11 +114,11 @@ function calculateScaleFactor(width, height) {
     return scaleFactor
 }
 
-function resizeImage(imgToResize, resizingFactor = 0.5) {
+function resizeImage(imgToResize, scaleFactor = 0.5) {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    const canvasWidth = imgToResize.width * resizingFactor;
-    const canvasHeight = imgToResize.height * resizingFactor;
+    const canvasWidth = imgToResize.width * scaleFactor;
+    const canvasHeight = imgToResize.height * scaleFactor;
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
