@@ -1,0 +1,13 @@
+{% for ann in announcements_page.object_list %}
+    <div class="card m-3">
+        <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
+        <div class="card-body">
+            <h5 class="card-title">{{ ann.title }}</h5>
+            <p class="card-text"><strong>${{ ann.get_price }}</strong></p>
+        </div>
+    </div>
+{% endfor %}
+
+{% if announcements_page.has_next %}
+    <div class="next-page" hx-get="{% url "announcement-list" %}?{{ filter_data }}" hx-target=".next-page" hx-trigger="revealed" hx-swap="outerHTML"></div>
+{% endif %} 

@@ -1,0 +1,76 @@
+@import "fonts";
+@import "colors";
+
+.submit-filters-button {
+  background-color: $font-color;
+  border-color: $font-color;
+  margin-top: -0.5rem;
+
+  &:hover {
+    background-color: $font-hover-color;
+    border-color: $font-hover-color;
+    -webkit-box-shadow: inset -4px -8px 20px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset -4px -8px 20px -12px rgba(0, 0, 0, 0.75);
+    box-shadow: inset -4px -8px 20px -12px rgba(0, 0, 0, 0.75);
+  }
+
+  img {
+    width: 2rem;
+  }
+}
+
+.filter-base-container {
+  border-bottom: thin solid $bg-footer-color;
+}
+
+.category-container {
+  padding-bottom: 0.5rem;
+
+  .category {
+    button {
+      background-color: $font-color;
+      border-color: $font-color;
+    }
+  }
+}
+
+.filter-container {
+  margin-top: 1rem;
+
+  .price-filter {
+    .price-gte, .price-lte {
+      width: 5rem;
+    }
+  }
+}
+
+#category-filter-input {
+  display: none;
+}
+
+#filters-data{
+  display: none;
+}
+.announcements-base-container {
+  margin-top: 1rem;
+}
+
+.card {
+  width: 360px;
+  cursor: pointer;
+
+  img {
+    height: 360px;
+    object-fit: cover;
+    padding: 0;
+  }
+
+  .card-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+

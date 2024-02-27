@@ -24,7 +24,7 @@
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown d-flex justify-content-center align-items-center header-avatar">
                             <a class="nav-link" data-bs-toggle="dropdown" aria-current="page" href="#">
-                                <img class="avatar" src="{{ user.get_image }}" />
+                                <img class="avatar" src="{{ user.get_image_preview }}" />
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

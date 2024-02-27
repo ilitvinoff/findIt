@@ -1,10 +1,9 @@
 import io
-import sys
 
 from PIL import Image
 from django import forms
 from django.contrib.auth import get_user_model
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
 from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.formfields import PhoneNumberField
@@ -70,7 +69,7 @@ class BaseUserEditForm(forms.ModelForm):
 
             buffer = io.BytesIO()
             pil_image.save(buffer, format=original_image.image.format)
-            self.instance.image = InMemoryUploadedFile(
-                buffer, "ImageField", original_image.name, original_image.content_type, sys.getsizeof(buffer), None)
+            self.instance.image.save(original_image.name, ContentFile(buffer.getvalue()), save=False)
+            buffer.close()
 
-        super(BaseUserEditForm, self).save(commit)
+        return super(BaseUserEditForm, self).save(commit)

@@ -14,13 +14,28 @@ img {
   height: auto;
 }
 
-a {
-  color: $btn-primary-color;
+.base_link {
+  a {
+    color: $font-color;
+    font-weight: map-get($font-weights, "bold");
+    text-decoration: none;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: $font-color;
+    height: 1px;
+    transition: all .3s;
+    transform: scale(1);
+  }
+
+  &:hover::after {
+    transform: scale(0);
+  }
 }
 
-a:hover {
-  color: $btn-secondary-color;
-}
 
 main {
   max-width: 1280px;
@@ -29,9 +44,11 @@ main {
 .btn-primary {
   background-color: $btn-primary-color;
   color: $bg-color;
-  border-color: unset;
+  box-sizing: border-box;
+  border: 1px solid transparent;
 
   &:hover {
+    box-sizing: border-box;
     background-color: $btn-hover;
     border: 1px solid $btn-primary-color;
   }
@@ -40,9 +57,11 @@ main {
 .btn-secondary {
   background-color: $btn-secondary-color;
   color: $bg-color;
-  border: none;
+  border: 1px solid transparent;
+  box-sizing: border-box;
 
   &:hover {
+    box-sizing: border-box;
     background-color: $btn-hover;
     border: 1px solid $btn-primary-color;
   }
@@ -61,8 +80,18 @@ main {
   margin: 0 auto;
 }
 
-.error-block{
+.error-block {
   font-size: 14px;
   color: $alert-color;
 
+}
+
+.input-group-text {
+  background-color: $font-color;
+  border-color: $font-color;
+
+  img {
+    background-color: transparent;
+    border: unset;
+  }
 }

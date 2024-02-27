@@ -12,12 +12,22 @@ img {
   height: auto;
 }
 
-a {
-  color: #76abee;
+.base_link a {
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
 }
-
-a:hover {
-  color: #adc2c8;
+.base_link::after {
+  content: "";
+  display: block;
+  width: 100%;
+  background-color: #111;
+  height: 1px;
+  transition: all 0.3s;
+  transform: scale(1);
+}
+.base_link:hover::after {
+  transform: scale(0);
 }
 
 main {
@@ -27,9 +37,11 @@ main {
 .btn-primary {
   background-color: #76abee;
   color: azure;
-  border-color: unset;
+  box-sizing: border-box;
+  border: 1px solid transparent;
 }
 .btn-primary:hover {
+  box-sizing: border-box;
   background-color: #8ecae6;
   border: 1px solid #76abee;
 }
@@ -37,9 +49,11 @@ main {
 .btn-secondary {
   background-color: #adc2c8;
   color: azure;
-  border: none;
+  border: 1px solid transparent;
+  box-sizing: border-box;
 }
 .btn-secondary:hover {
+  box-sizing: border-box;
   background-color: #8ecae6;
   border: 1px solid #76abee;
 }
@@ -60,6 +74,15 @@ main {
 .error-block {
   font-size: 14px;
   color: #e34439;
+}
+
+.input-group-text {
+  background-color: #111;
+  border-color: #111;
+}
+.input-group-text img {
+  background-color: transparent;
+  border: unset;
 }
 
 /*# sourceMappingURL=base.css.map */

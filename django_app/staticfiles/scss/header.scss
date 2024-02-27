@@ -1,6 +1,6 @@
 @import "fonts";
 @import "colors";
-@import "signup";
+@import "auth/signup";
 
 .navbar {
   font-weight: map-get($font-weights, "reg");

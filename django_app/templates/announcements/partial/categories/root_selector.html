@@ -1,0 +1,19 @@
+<div class="category-container d-flex justify-content-start">
+    <div class="dropdown category me-1">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Choose Category
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li {% if c.parent %}hx-get="{% url "root-categories" %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click"{% endif %}>
+                <a class="dropdown-item" href="#">--</a>
+            </li>
+
+            {% for c in  category_hierarchy %}
+                <li hx-get="{% url "categories" pk=c.id %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click">
+                    <a class="dropdown-item" href="#">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

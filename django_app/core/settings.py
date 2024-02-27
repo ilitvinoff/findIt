@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # third party
+    'django_filters',
     "phonenumber_field",
 
     # internal apps
     "users",
+    "announcement",
 ]
 
 MIDDLEWARE = [
@@ -133,9 +135,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
 
+USE_AWS = bool(util.strtobool(os.getenv("USE_AWS", False)))
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "aws": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage"
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
@@ -149,9 +156,53 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-
 # PHONE NUMBER SETTINGS
 # https://django-phonenumber-field.readthedocs.io/en/latest/reference.html#settings-format-choices
 PHONENUMBER_DB_FORMAT = os.getenv("PHONENUMBER_DB_FORMAT", "INTERNATIONAL")
 # https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
 PHONENUMBER_DEFAULT_REGION = os.getenv("PHONENUMBER_DEFAULT_REGION", "UA")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": '{levelname} {asctime} {module} {funcName} {lineno} "{message}"',
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": os.getenv("CONSOLE_HANDLER_LEVEL", "INFO"),
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+
+        "users": {
+            "handlers": ["console"],
+            "level": os.getenv("APP_LOGGER_LEVEL", "INFO"),
+        },
+
+        "announcement": {
+            "handlers": ["console"],
+            "level": os.getenv("APP_LOGGER_LEVEL", "INFO"),
+        },
+    },
+}
+
+MEDIA_THUMB_SIZE = tuple(int(i) for i in os.getenv("MEDIA_THUMB_SIZE", '600,400').split(','))

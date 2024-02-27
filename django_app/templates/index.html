@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_meta %}
+    <link rel="stylesheet" href="{% static "/scss/index.css" %}">
+{% endblock %}
+
+
+{% block main %}
+    <div class="container main-content">
+
+        <form id="filters-form" class="container pt-2 filter-base-container" hx-get="{% url "announcement-list" %}" hx-target=".announcements-list-container" hx-swap="innerHTML">
+            {% include "announcements/partial/categories/root_selector.html" %}
+
+            <div class="filter-container d-flex flex-wrap align-items-end">
+                <div class="contain-filter me-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <img class="form-check-input mt-0" src="{% static "assets/images/search.svg" %}" alt="search">
+                        </div>
+                        <input type="text" placeholder="Search" name="a_contain" class="form-control" id="contain-filter">
+                    </div>
+                </div>
+
+                <div class="price-filter">
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <img class="form-check-input mt-0" src="{% static "assets/images/dollar.svg" %}" alt="search">
+                        </div>
+                        <input type="number" name="price__gte" class="form-control price-gte" id="price-gte-filter">
+                        <div class="input-group-text">
+                            <img class="form-check-input mt-0" src="{% static "assets/images/minus.svg" %}" alt="search">
+                        </div>
+                        <input type="number" name="price__lte" class="form-control price-lte" id="price-lte-filter">
+                    </div>
+                </div>
+
+                <button class="btn ms-4 align-self-baseline submit-filters-button">
+                    <img src="{% static "assets/images/check.svg" %}" alt="submit">
+                </button>
+            </div>
+        </form>
+
+        <div class="container announcements-base-container">
+            <h6 class="announcements-list-title">Newest:</h6>
+
+            <div class="announcements-list-container d-flex flex-wrap justify-content-between align-content-center">
+                {% include "announcements/partial/list.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

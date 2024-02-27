@@ -25,7 +25,8 @@ from users import error_views
 urlpatterns = [
     path("", views.IndexView.as_view(), name="homepage"),
     path("admin/", admin.site.urls),
-    path("accounts/", include("users.urls"))
+    path("accounts/", include("users.urls")),
+    path("announcements/", include("announcement.urls")),
 ]
 
 # Error pages

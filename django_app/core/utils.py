@@ -12,17 +12,25 @@ def select_storage():
 def get_storage_path(instance, filename):
     # must return Unix-style path (with forward slashes)
     # more at https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.FileField.upload_to
-    dirname = "tmp"
     from users.models import User
+    from announcement.models import Announcement
+    from announcement.models import AnnouncementImage
 
+    path = "tmp"
     instance_type = type(instance)
 
     if instance_type is User:
-        dirname = "unknown_user_type"
+        path = "unknown_user_type"
 
         if instance.type == User.Types.COMMON:
-            dirname = "common_user"
+            path = "common_user"
         elif instance.type == User.Types.MODERATOR:
-            dirname = "moderator_user"
+            path = "moderator_user"
 
-    return "{instance}/{filename}".format(instance=dirname, filename=filename)
+    elif instance_type is Announcement:
+        path = f"announcement_{instance.owner.id}"
+
+    elif instance_type is AnnouncementImage:
+        path = f"announcement_{instance.announcement.owner.id}_{instance.announcement.id}"
+
+    return "{path}/{filename}".format(path=path, filename=filename)
