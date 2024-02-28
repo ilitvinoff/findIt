@@ -8,7 +8,6 @@
 
 {% block main %}
     <div class="container main-content">
-
         <form id="filters-form" class="container pt-2 filter-base-container" hx-get="{% url "announcement-list" %}" hx-target=".announcements-list-container" hx-swap="innerHTML">
             {% include "announcements/partial/categories/root_selector.html" %}
 
@@ -44,8 +43,11 @@
         <div class="container announcements-base-container">
             <h6 class="announcements-list-title">Newest:</h6>
 
-            <div class="announcements-list-container d-flex flex-wrap justify-content-between align-content-center">
+            <div class="announcements-list-container d-flex flex-wrap align-content-center">
                 {% include "announcements/partial/list.html" %}
+            </div>
+            <div id="id-next-page-loader" class="next-page-loader">
+                <img src="{% static "assets/images/my-loader.svg" %}" alt="loading...">
             </div>
         </div>
     </div>

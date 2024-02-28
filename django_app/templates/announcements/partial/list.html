@@ -9,5 +9,5 @@
 {% endfor %}
 
 {% if announcements_page.has_next %}
-    <div class="next-page" hx-get="{% url "announcement-list" %}?{{ filter_data }}" hx-target=".next-page" hx-trigger="revealed" hx-swap="outerHTML"></div>
+    <div class="next-page" hx-get="{% url "announcement-list" %}?{{ filter_data }}" hx-target=".next-page" hx-trigger="revealed" hx-swap="outerHTML" hx-indicator="#id-next-page-loader"></div>
 {% endif %} 
