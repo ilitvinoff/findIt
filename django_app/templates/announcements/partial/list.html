@@ -1,10 +1,13 @@
 {% for ann in announcements_page.object_list %}
     <div class="card m-3">
-        <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
-        <div class="card-body">
-            <h5 class="card-title">{{ ann.title }}</h5>
-            <p class="card-text"><strong>${{ ann.get_price }}</strong></p>
-        </div>
+        <a href="{% url "announcement-detail" pk=ann.pk %}">
+            <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
+            <div class="card-body">
+                <h5 class="card-title">{{ ann.title }}</h5>
+                <p class="card-text">{{ ann.content }}</p>
+                <strong>${{ ann.get_price }}</strong>
+            </div>
+        </a>
     </div>
 {% endfor %}
 

@@ -122,8 +122,13 @@ class Announcement(ThumbnailModel):
         return round(self.price, 2)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.pk or (update_fields and "poster" in update_fields):
+        if not self.pk:
             self._make_thumbnail("poster", "poster_preview")
+
+        if update_fields and "poster" in update_fields:
+            self._make_thumbnail("poster", "poster_preview")
+            update_fields.append("poster_preview")
+
         return super(Announcement, self).save(force_insert, force_update, using, update_fields)
 
 

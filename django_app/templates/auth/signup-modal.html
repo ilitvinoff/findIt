@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="container-fluid">
         <div class="modal-dialog">
@@ -27,9 +29,9 @@
                             <label for="{{ form.password.id_for_label }}" class="col-form-label">*</label>
                             <div class="input-group flex-nowrap mb-3">
                                 <input type="password" autocomplete="new-password" class="form-control password" placeholder="Password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}">
-                                <span class="input-group-text">
-                                    <i class="fa fa-eye togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}" style="cursor: pointer"></i>
-                                </span>
+                                <div class="input-group-text">
+                                    <img class="form-check-input mt-0 togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}" src="{% static "assets/images/eye.svg" %}" alt="search">
+                                </div>
                                 {{ form.password.errors }}
                             </div>
                         </div>
@@ -38,9 +40,9 @@
                             <label for="{{ form.password.id_for_label }}_confirm" class="col-form-label">*</label>
                             <div class="input-group flex-nowrap">
                                 <input type="password" autocomplete="new-password" class="form-control password" placeholder="Confirm password" id="{{ form.password.id_for_label }}_confirm" name="{{ form.password.name }}_confirm">
-                                <span class="input-group-text">
-                                    <i class="fa fa-eye togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}_confirm" style="cursor: pointer"></i>
-                                </span>
+                                <div class="input-group-text">
+                                    <img class="form-check-input mt-0 togglePasswordVisibility" data-input-id="{{ form.password.id_for_label }}_confirm" src="{% static "assets/images/eye.svg" %}" alt="search">
+                                </div>
                             </div>
                         </div>
 

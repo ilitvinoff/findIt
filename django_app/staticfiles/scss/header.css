@@ -44,4 +44,8 @@
   transform: scale(1);
 }
 
+.togglePasswordVisibility {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=header.css.map */

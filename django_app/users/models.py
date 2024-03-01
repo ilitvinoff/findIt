@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin, ThumbnailModel):
     type = models.IntegerField(_("Type"), choices=Types.choices)
 
     username = models.CharField(_("Username"), blank=False, null=True, unique=True, max_length=30)
-    phone_number = PhoneNumberField(_("Phone number"), blank=False, null=True, default=None, max_length=20)
+    phone_number = PhoneNumberField(_("Phone number"), blank=True, null=True, default=None, max_length=20)
     image = models.ImageField(upload_to=get_storage_path, blank=True, null=False, storage=select_storage)
     image_preview = models.ImageField(upload_to=get_storage_path, blank=True, null=False, storage=select_storage)
 

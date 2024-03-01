@@ -1,3 +1,5 @@
+{% load static %}
+
 <form id="signin-form" hx-post={% url "login" %} hx-trigger="submit"  hx-target="#signin-form" hx-swap="outerHTML">
     {% csrf_token %}
     <div class="modal-body">
@@ -18,10 +20,9 @@
             <div class="input-group flex-nowrap mb-3">
                 <input type="password" autocomplete="current-password" class="form-control password"
                        placeholder="Password" id="id_login_password_input" name="password">
-                <span class="input-group-text">
-                                        <i class="fa fa-eye togglePasswordVisibility"
-                                           data-input-id="id_login_password_input" style="cursor: pointer"></i>
-                                    </span>
+                <div class="input-group-text">
+                    <img class="form-check-input mt-0 togglePasswordVisibility" data-input-id="id_login_password_input" src="{% static "assets/images/eye.svg" %}" alt="search">
+                </div>
             </div>
         </div>
 

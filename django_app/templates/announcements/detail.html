@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_meta %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static "/scss/announcements/detail.css" %}">
+{% endblock %}
+
+{% block main %}
+    <div class="container detail-announcement-base-container">
+        <h1>{{ announcement.title }}</h1>
+        <div class="row detail-announcement">
+
+            <div class="col-md-9 description">
+                <div class="row media">
+                    <div class="col-md-9 swiper main-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img class="main-swiper-slide" data-index="0" src="{{ announcement.get_image_preview }}" alt="photo">
+                            </div>
+
+                            {% for photo in photos %}
+                                <div class="swiper-slide">
+                                    <img class="main-swiper-slide" data-index="{{ forloop.counter }}" src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
+                                    <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="thumbs-swiper-container">
+                            <div class="swiper-button-prev">
+                                <img src="{% static "/assets/images/up.svg" %}" alt="up">
+                            </div>
+                            <div class="thumbs-swiper swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="{{ announcement.get_image_preview }}" loading="lazy" alt="photo">
+                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
+                                    </div>
+
+                                    {% for photo in photos %}
+                                        <div class="swiper-slide">
+                                            <img src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="swiper-button-next">
+                                <img src="{% static "/assets/images/down.svg" %}" alt="down">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row about">
+                    <div class="col">
+                        <div class="content">
+                            {{ announcement.content }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-2 owner-info-container">
+                <div class="owner-info">
+                    <img class="avatar" src="{{ announcement.owner.get_image_preview }}" alt="photo">
+                    <address>
+                        <a href="mailto:{{ announcement.owner.email }}">
+                            {{ announcement.owner.email }}
+                        </a>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-swiper-gallery-view">
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div id="galleryContainer">
+
+    <div class="gallery-button-prev">
+        <img src="{% static "/assets/images/left.svg" %}" alt="arrow">
+    </div>
+
+    <div id="gallery" class="container gallery">
+        <span id="closeGalleryBtn">&times;</span>
+            <div class="swiper gallery-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ announcement.get_image }}" loading="lazy" alt="photo">
+                        <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
+                    </div>
+
+                    {% for photo in photos %}
+                        <div class="swiper-slide">
+                            <img src="{{ photo.get_image }}" loading="lazy" alt="photo">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+    <div class="gallery-button-next">
+        <img src="{% static "/assets/images/right.svg" %}" alt="arrow">
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static "js/announcements/detail.js" %}"></script>
+{% endblock %}

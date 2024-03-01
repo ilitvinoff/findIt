@@ -1,3 +1,7 @@
+const passwordTypeIcons = new Map();
+passwordTypeIcons.set("text", "eye-slashed.svg")
+passwordTypeIcons.set("password", "eye.svg")
+
 function passwordVisibilityListeners() {
     let togglePasswordVisibilityButtons = document.querySelectorAll(".togglePasswordVisibility:not(.click-listen)");
     togglePasswordVisibilityButtons.forEach((el) => {
@@ -7,12 +11,14 @@ function passwordVisibilityListeners() {
             let type = password.getAttribute("type") === "password" ? "text" : "password";
             password.setAttribute("type", type);
             // toggle the eye icon
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
+            let pathSplit = this.src.split("/")
+            pathSplit[pathSplit.length -1] = passwordTypeIcons.get(type)
+            this.src = pathSplit.join("/")
         });
         el.classList.add('click-listen');
     });
 }
+
 function equalEvery(curValue, index, arr){
     return curValue===arr[0]
 }

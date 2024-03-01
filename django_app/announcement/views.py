@@ -1,9 +1,10 @@
 from urllib.parse import urlencode
 from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from announcement.filters import AnnouncementFilters
-from announcement.models import Category, Announcement
+from announcement.models import Category, Announcement, AnnouncementImage
 
 
 class CategoriesView(TemplateView):
@@ -31,7 +32,7 @@ class CategoriesView(TemplateView):
         return super(CategoriesView, self).get(request, *args, **kwargs)
 
 
-class AnnouncementList(TemplateView):
+class AnnouncementListView(TemplateView):
     http_method_names = ["post", "get"]
     template_name = "announcements/partial/list.html"
     PER_PAGE = 12
@@ -48,3 +49,16 @@ class AnnouncementList(TemplateView):
         context.update({"announcements_page": page, "filter_data": urlencode(data)})
         return self.render_to_response(context)
 
+
+class AnnouncementDetailView(TemplateView):
+    http_method_names = ["post", "get"]
+    template_name = "announcements/detail.html"
+    extra_context = {}
+
+    def get(self, request, *args, **kwargs):
+        a = get_object_or_404(Announcement, pk=kwargs.get("pk"))
+        self.extra_context.update({
+            "announcement": a,
+            "photos": AnnouncementImage.objects.filter(announcement=a.id)
+        })
+        return super(AnnouncementDetailView, self).get(request, *args, **kwargs)
