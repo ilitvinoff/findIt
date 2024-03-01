@@ -7,16 +7,16 @@
 
 {% block main %}
     <div class="container main-content">
-        <div class="row row-cols-md-3 justify-content-start">
-            <div class="profile-picture">
-                <img class="m-auto" src="{{ profile.get_image }}" alt="profile image"/>
-            </div>
+        <div class="row justify-content-between data-container">
+            <div class="col-md-7 d-flex flex-wrap justify-content-start">
+                <div class="profile-picture">
+                    <img class="m-auto" src="{{ profile.get_image }}" alt="profile image"/>
+                </div>
 
-            <div class="col user-data ms-5 mt-5">
+                <div class="col-md-2 user-data ms-5 mt-5">
 
-                {# USERNAME #}
-                <div class="row">
-                    <div class="col">
+                    {# USERNAME #}
+                    <div class="row flex-nowrap justify-content-start info-row">
                         <h6 class="d-inline">
                             <small class="text-muted">Username:</small>
                         </h6>
@@ -24,12 +24,10 @@
                             {{ profile.username }}
                         </div>
                     </div>
-                </div>
 
-                {% if  show_contacts %}
-                    {# EMAIL #}
-                    <div class="row mt-1">
-                        <div class="col">
+                    {% if  show_contacts %}
+                        {# EMAIL #}
+                        <div class="row mt-1 flex-nowrap justify-content-start info-row">
                             <h6 class="d-inline">
                                 <small class="text-muted">Email:</small>
                             </h6>
@@ -37,11 +35,9 @@
                                 {{ profile.email }}
                             </div>
                         </div>
-                    </div>
 
-                    {# PHONE #}
-                    <div class="row mt-1">
-                        <div class="col">
+                        {# PHONE #}
+                        <div class="row mt-1 flex-nowrap justify-content-start info-row">
                             <h6 class="d-inline">
                                 <small class="text-muted">Phone:</small>
                             </h6>
@@ -51,15 +47,28 @@
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-
-                <a class="btn btn-outline-danger mt-5" href="#" role="button" data-bs-toggle="modal"
-                   data-bs-target="#deleteProfileModal">Delete Profile</a>
-                <a class="btn btn-primary mt-5" href="{% url "edit-profile" %}" role="button">Edit Profile</a>
-
+                    {% endif %}
+                </div>
             </div>
 
+            <div class="col-md-3 buttons-container">
+                <a class="btn btn-outline-danger mt-2 w-75 text-center" href="#" role="button" data-bs-toggle="modal"
+                   data-bs-target="#deleteProfileModal">Delete</a>
+                <a class="btn btn-primary mt-1 w-75 text-center" href="{% url "edit-profile" %}" role="button">Edit
+                    Profile</a>
+            </div>
+        </div>
+
+        <div class="container announcements-base-container">
+            <div class="d-flex flex-wrap align-content-center announcements-list-container">
+                {% if announcements_page %}
+                    {% include "announcements/partial/list.html" %}
+                {% endif %}
+            </div>
+
+            <div id="id-next-page-loader" class="next-page-loader">
+                <img src="{% static "assets/images/my-loader.svg" %}" alt="loading...">
+            </div>
         </div>
     </div>
 

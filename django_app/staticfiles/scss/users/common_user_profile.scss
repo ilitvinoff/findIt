@@ -1,5 +1,92 @@
+@import "../colors";
+
 .main-content {
   margin-top: 2.5rem;
+
+  .data-container{
+    padding-bottom: 1rem;
+    border-bottom: thin solid $bg-footer-color;
+  }
+
+  .info-row {
+    h6 {
+      width: unset;
+    }
+
+    div {
+      width: unset;
+    }
+  }
+
+  .announcements-base-container {
+    margin-top: 2rem;
+
+    .announcements-list-container {
+      @media screen and (max-width: 1400px) {
+        justify-content: space-around;
+      }
+      justify-content: space-between;
+
+      .card {
+        width: 360px;
+        cursor: pointer;
+
+        a {
+          text-decoration: none !important;
+          color: $font-color;
+
+          img {
+            height: 360px;
+            object-fit: cover;
+            padding: 0;
+          }
+
+          .card-body {
+            min-height: 10rem;
+
+            .card-title, .card-text {
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-line-clamp: 2;
+              line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+
+            strong {
+              padding: 4px;
+              border: 1px solid $font-color;
+              border-radius: 2px;
+              background-color: $price-color;
+            }
+
+          }
+
+        }
+      }
+    }
+
+    .next-page-loader {
+      width: 100%;
+      text-align: center;
+      display: none;
+
+      img {
+        height: 100px;
+      }
+    }
+
+    .htmx-request.next-page-loader {
+      display: block;
+    }
+
+    .htmx-request .next-page-loader {
+      display: block;
+    }
+  }
+
+  .buttons-container {
+    margin-left: 0;
+  }
 }
 
 .profile-picture {

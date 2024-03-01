@@ -1,10 +1,14 @@
+from urllib.parse import urlencode
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.http import HttpResponseServerError
 from django.views import generic
 from django.contrib.auth import login, get_user_model, logout, views as auth_views
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 
+from announcement.models import Announcement
 from users import forms
 from users.forms import SignUpForm
 
@@ -48,6 +52,7 @@ class UserProfileView(generic.TemplateView):
     extra_context = {}
 
     SHOW_CONTACTS = "show_contacts"
+    ANNOUNCEMENTS_PER_PAGE = 21
 
     @staticmethod
     def _is_owner(user, pk):
@@ -68,6 +73,11 @@ class UserProfileView(generic.TemplateView):
         request_method = request.method.lower()
 
         if request_method == "get":
+            data = request.GET.copy()
+            qs = Announcement.objects.filter(owner=pk).order_by("-updated")
+            p = Paginator(qs, self.ANNOUNCEMENTS_PER_PAGE)
+            page = p.get_page(data.get("page", 1))
+            self.extra_context.update({"announcements_page": page, "filter_data": urlencode(data)})
             if is_owner:
                 self.extra_context.update({self.SHOW_CONTACTS: True})
 
