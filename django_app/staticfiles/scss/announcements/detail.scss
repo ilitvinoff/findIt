@@ -13,14 +13,17 @@
         max-height: 400px;
         max-width: 600px;
 
-        .swiper-slide {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
+        .swiper-wrapper {
 
-          img {
-            object-fit: contain;
+          .swiper-slide {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            cursor: pointer;
+
+            img {
+              object-fit: contain;
+            }
           }
         }
       }
@@ -158,6 +161,8 @@
 
     img {
       object-fit: contain;
+      max-height: 100vh;
+      max-width: 100vw;
     }
   }
 

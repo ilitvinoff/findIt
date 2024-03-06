@@ -38,8 +38,13 @@
   margin-top: 1rem;
 
   .price-filter {
-    .price-gte, .price-lte {
-      width: 5rem;
+
+    .price-gte {
+      flex: 0 1 5rem;
+    }
+
+    .price-lte {
+      flex: 0 1 6rem;
     }
   }
 }

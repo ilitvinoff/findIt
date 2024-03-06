@@ -27,6 +27,15 @@
       }
       justify-content: space-between;
 
+      .add-announcement-btn{
+        border: unset;
+
+        img {
+          border: $font-hover-color 2px solid;
+          border-radius: 0.5rem;
+        }
+      }
+
       .card {
         width: 360px;
         cursor: pointer;

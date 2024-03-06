@@ -1,0 +1,25 @@
+@import "../colors";
+
+
+.price-input-container {
+  .price-input {
+    flex: 0 1 5rem;
+  }
+}
+
+.poster-input-label {
+  width: 70%;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  border: 1px solid $font-hover-color;
+  border-radius: 1rem;
+  margin: 0 auto;
+}
+
+.poster-preview-container {
+  display: none;
+}
+
+#poster-preview {
+  cursor: pointer;
+}

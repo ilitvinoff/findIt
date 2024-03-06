@@ -29,28 +29,30 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="thumbs-swiper-container">
-                            <div class="swiper-button-prev">
-                                <img src="{% static "/assets/images/up.svg" %}" alt="up">
-                            </div>
-                            <div class="thumbs-swiper swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ announcement.get_image_preview }}" loading="lazy" alt="photo">
-                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
-                                    </div>
-
-                                    {% for photo in photos %}
+                        {% if photos %}
+                            <div class="thumbs-swiper-container">
+                                <div class="swiper-button-prev">
+                                    <img src="{% static "/assets/images/up.svg" %}" alt="up">
+                                </div>
+                                <div class="thumbs-swiper swiper">
+                                    <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <img src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
+                                            <img src="{{ announcement.get_image_preview }}" loading="lazy" alt="photo">
+                                            <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
                                         </div>
-                                    {% endfor %}
+
+                                        {% for photo in photos %}
+                                            <div class="swiper-slide">
+                                                <img src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <img src="{% static "/assets/images/down.svg" %}" alt="down">
                                 </div>
                             </div>
-                            <div class="swiper-button-next">
-                                <img src="{% static "/assets/images/down.svg" %}" alt="down">
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
 

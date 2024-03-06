@@ -79,6 +79,7 @@ main {
 .input-group-text {
   background-color: #111;
   border-color: #111;
+  color: #e9ecef;
 }
 .input-group-text img {
   background-color: transparent;

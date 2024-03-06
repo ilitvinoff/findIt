@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    {% if  show_contacts %}
+                    {% if  show_contacts or request.user.id == profile.id %}
                         {# EMAIL #}
                         <div class="row mt-1 flex-nowrap justify-content-start info-row">
                             <h6 class="d-inline">
@@ -52,15 +52,27 @@
             </div>
 
             <div class="col-md-3 buttons-container">
-                <a class="btn btn-outline-danger mt-2 w-75 text-center" href="#" role="button" data-bs-toggle="modal"
-                   data-bs-target="#deleteProfileModal">Delete</a>
-                <a class="btn btn-primary mt-1 w-75 text-center" href="{% url "edit-profile" %}" role="button">Edit
-                    Profile</a>
+                {% if profile.id == request.user.id %}
+                    <a class="btn btn-outline-danger mt-2 w-75 text-center" href="#" role="button" data-bs-toggle="modal"
+                        data-bs-target="#deleteProfileModal">Delete</a>
+                    <a class="btn btn-primary mt-1 w-75 text-center" href="{% url "edit-profile" %}" role="button">Edit
+                        Profile</a>
+                {% endif %}
             </div>
         </div>
 
         <div class="container announcements-base-container">
+            <h2>Published Announcements:</h2>
+
             <div class="d-flex flex-wrap align-content-center announcements-list-container">
+                {% if profile.id == request.user.id %}
+                    <div class="m-3 add-announcement-btn">
+                        <a href="{% url "announcement-create" %}">
+                            <img src="{% static "assets/images/plus.svg" %}" class="card-img-top" alt="add announcement">
+                        </a>
+                    </div>
+                {% endif %}
+
                 {% if announcements_page %}
                     {% include "announcements/partial/list.html" %}
                 {% endif %}
@@ -73,24 +85,25 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProfileModalLabel">Delete Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete your account?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger" hx-delete="{% url 'profile' user.pk %}">
-                        Delete
-                    </button>
+    {% if profile.id == user.id %}
+        <div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProfileModalLabel">Delete Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete your account?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-danger" hx-delete="{% url 'profile' user.pk %}">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

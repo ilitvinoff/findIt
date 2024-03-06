@@ -67,7 +67,6 @@ function cropModalWindowHandlers() {
 }
 
 // Resize the image if necessary, as there are issues with overly large images when cropping on iOS devices.
-// Additionally, there's no need to store large images on the server side.
 function prepareUploadedImage() {
     sourceImageFileInput.addEventListener("input", async function (e) {
         let [file] = sourceImageFileInput.files;

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_meta %}
+    <link rel="stylesheet" href="{% static "/scss/announcements/create.css" %}">
+{% endblock %}
+
+{% block main %}
+    <div class="container create-announcement-base-container">
+        <h1 class="mb-4 mt-4 border-bottom">Create New Announcement</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="invalid-feedback d-inline">
+                {{ form.category.errors }}
+            </div>
+            {% if has_preset_category %}
+                {% include "announcements/partial/categories/selector.html" %}
+            {% else %}
+                {% include "announcements/partial/categories/root_selector.html" %}
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="label-errors-container d-flex flex-wrap align-items-baseline justify-content-start">
+                        <label for="title-input" class="form-label h4 mt-5">Title</label>
+                        <div class="invalid-feedback d-inline w-auto">
+                            {{ form.title.errors }}
+                        </div>
+                    </div>
+                    <div class="w-75 input-group mb-3">
+                      <input name="title" type="text" class="form-control" {% if form.title.value %} value="{{ form.title.value }}" {% endif %} id="title-input">
+                    </div>
+
+                    <div class="label-errors-container d-flex flex-wrap align-items-baseline justify-content-start">
+                        <label for="content-input" class="form-label h4 mt-2">Description</label>
+                        <div class="invalid-feedback d-inline w-auto">
+                            {{ form.content.errors }}
+                        </div>
+                    </div>
+                    <div class="w-75 input-group mb-3">
+                        <textarea name="content" rows="10" class="form-control" id="content-input">{% if form.content.value %}{{ form.content.value }}{% endif %}</textarea>
+                    </div>
+
+                    <div class="price-input-container">
+                        <div class="label-errors-container d-flex flex-wrap align-items-baseline justify-content-start">
+                            <label for="id-price-input" class="form-label h4 mt-2">Price</label>
+                            <div class="invalid-feedback d-inline w-auto">
+                                {{ form.price.errors }}
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-text">
+                                <img class="form-check-input mt-0" src="{% static "assets/images/dollar.svg" %}" alt="search">
+                            </div>
+                            <input name="price" {% if form.price.value %} value="{{ form.price.value|stringformat:'s' }}" {% endif %} type="number" min="0" class="form-control price-input" id="id-price-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="invalid-feedback d-inline w-auto">
+                        {{ form.poster.errors }}
+                    </div>
+                    <label for="poster-input" class="form-label h4 mt-2 poster-input-label d-flex align-items-center justify-content-center">
+                        <div class="w-25 h-25 d-flex align-items-center justify-content-center poster-input-icon-container">
+                            <img id="id_add_poster_btn" class="w-100" src="{% static "assets/images/upload-camera.svg" %}" alt="Add Poster"/>
+                        </div>
+                    </label>
+                    <input name="poster" type="file" class="form-control d-none" id="poster-input" aria-describedby="title-input-addon" accept="image/*">
+                    <div class="poster-preview-container align-items-center justify-content-center">
+                        <label for="poster-input">
+                            <img id="poster-preview" class="w-100" src="" alt="Poster Preview"/>
+                        </label>
+                    </div>
+
+            </div>
+
+            <div class="col-md-10 d-flex flex-wrap mt-2 align-items-end justify-content-end buttons-container">
+                <div class="invalid-feedback d-flex w-100 justify-content-end">
+                    <div class="wrapper">
+                        {{ form.non_field_errors }}
+                    </div>
+                </div>
+                <a href="{% url "profile" pk=user.id %}" role="button" class="btn btn-secondary me-1">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static "js/announcements/create.js" %}"></script>
+{% endblock %}

@@ -11,13 +11,13 @@
   max-height: 400px;
   max-width: 600px;
 }
-.detail-announcement-base-container .detail-announcement .media .main-swiper .swiper-slide {
+.detail-announcement-base-container .detail-announcement .media .main-swiper .swiper-wrapper .swiper-slide {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   cursor: pointer;
 }
-.detail-announcement-base-container .detail-announcement .media .main-swiper .swiper-slide img {
+.detail-announcement-base-container .detail-announcement .media .main-swiper .swiper-wrapper .swiper-slide img {
   object-fit: contain;
 }
 .detail-announcement-base-container .detail-announcement .media .thumbs-swiper-container {
@@ -130,6 +130,8 @@
 }
 #galleryContainer.active .swiper-slide img {
   object-fit: contain;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 #galleryContainer.active .gallery-button-prev, #galleryContainer.active .gallery-button-next {
   width: 1rem;

@@ -51,14 +51,7 @@ class UserProfileView(generic.TemplateView):
     http_method_names = ['get', 'delete']
     extra_context = {}
 
-    SHOW_CONTACTS = "show_contacts"
     ANNOUNCEMENTS_PER_PAGE = 21
-
-    @staticmethod
-    def _is_owner(user, pk):
-        if not user:
-            return False
-        return user.pk == pk
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
@@ -69,7 +62,6 @@ class UserProfileView(generic.TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get("pk")
-        is_owner = self._is_owner(request.user, pk)
         request_method = request.method.lower()
 
         if request_method == "get":
@@ -78,8 +70,6 @@ class UserProfileView(generic.TemplateView):
             p = Paginator(qs, self.ANNOUNCEMENTS_PER_PAGE)
             page = p.get_page(data.get("page", 1))
             self.extra_context.update({"announcements_page": page, "filter_data": urlencode(data)})
-            if is_owner:
-                self.extra_context.update({self.SHOW_CONTACTS: True})
 
         elif request_method == "delete":
             if is_owner:

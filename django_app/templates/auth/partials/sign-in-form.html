@@ -4,7 +4,7 @@
     {% csrf_token %}
     <div class="modal-body">
         {% if form.errors %}
-            <div class="mb-3 error-block">
+            <div class="mb-3 invalid-feedback d-inline">
                 Please enter a correct Email and password. Note that both fields may be case-sensitive.
             </div>
         {% endif %}

@@ -1,6 +1,6 @@
-<div class="category-container d-flex justify-content-start">
+<div class="category-container d-flex flex-wrap justify-content-start">
     {% for c in category_hierarchy %}
-        <div class="dropdown category me-1">
+        <div class="dropdown category mt-1 me-1">
             <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ c.name }}
             </button>
@@ -24,25 +24,27 @@
             </ul>
         </div>
 
-        {% if forloop.last and c.children %}
-            <div class="dropdown category ms-1">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    --
-                </button>
+        {% if forloop.last %}
+            {% if c.children %}
+                <div class="dropdown category mt-1">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        --
+                    </button>
 
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li hx-get="{% url "categories" pk=c.id %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click">
-                        <a class="dropdown-item active" href="#">--</a>
-                    </li>
-
-                    {% for ch in  c.children %}
-                        <li hx-get="{% url "categories" pk=ch.id %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click">
-                            <a class="dropdown-item" href="#">{{ ch.name }}</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li hx-get="{% url "categories" pk=c.id %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click">
+                            <a class="dropdown-item active" href="#">--</a>
                         </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <input type="number" name="category" class="form-control" id="category-filter-input" value="{{ c.id }}">
+
+                        {% for ch in  c.children %}
+                            <li hx-get="{% url "categories" pk=ch.id %}" hx-target=".category-container" hx-swap="outerHTML" hx-trigger="click">
+                                <a class="dropdown-item" href="#">{{ ch.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <input type="number" name="category" class="form-control d-none" id="category-filter-input" value="{{ c.id }}">
         {% endif %}
 
     {% endfor %}
