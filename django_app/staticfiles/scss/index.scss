@@ -74,17 +74,19 @@
         text-decoration: none !important;
         color: $font-color;
 
-        img {
-          height: 360px;
-          object-fit: cover;
-          padding: 0;
+        .poster-container {
+          flex: 0 0 360px;
+          background-color: rgba(0, 0, 0, 0.1);
+          img {
+            object-fit: contain;
+            padding: 0;
+          }
         }
 
         .card-body {
           .card-title, .card-text {
             display: -webkit-box;
             overflow: hidden;
-            min-height: 10rem;
             -webkit-line-clamp: 2;
             line-clamp: 2;
             -webkit-box-orient: vertical;

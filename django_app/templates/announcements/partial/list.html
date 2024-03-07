@@ -1,8 +1,10 @@
 {% for ann in announcements_page.object_list %}
     <div class="card m-3">
-        <a href="{% url "announcement-detail" pk=ann.pk %}">
-            <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
-            <div class="card-body d-flex flex-column">
+        <a href="{% url "announcement-detail" pk=ann.pk %}" class="d-flex flex-column h-100">
+            <div class="poster-container d-flex justify-content-center align-items-center">
+                <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between h-100">
                 <div class="w-100">
                     <h5 class="card-title w-100">{{ ann.title }}</h5>
                     <p class="card-text w-100">{{ ann.content }}</p>

@@ -64,15 +64,17 @@
   text-decoration: none !important;
   color: #111;
 }
-.announcements-base-container .announcements-list-container .card a img {
-  height: 360px;
-  object-fit: cover;
+.announcements-base-container .announcements-list-container .card a .poster-container {
+  flex: 0 0 360px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.announcements-base-container .announcements-list-container .card a .poster-container img {
+  object-fit: contain;
   padding: 0;
 }
 .announcements-base-container .announcements-list-container .card a .card-body .card-title, .announcements-base-container .announcements-list-container .card a .card-body .card-text {
   display: -webkit-box;
   overflow: hidden;
-  min-height: 10rem;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;

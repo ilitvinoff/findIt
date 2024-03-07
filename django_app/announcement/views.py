@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
 from announcement.filters import AnnouncementFilters
-from announcement.forms import AnnouncementCreateForm
+from announcement.forms import AnnouncementCreateForm, AnnouncementImageCreateFormsSetFactory
 from announcement.models import Category, Announcement, AnnouncementImage
 
 
@@ -75,15 +75,22 @@ class AnnouncementCreateView(TemplateView):
         self.extra_context.update({
             "form": AnnouncementCreateForm(),
             "category_hierarchy": Category.objects.roots(),
+            "images_formset": AnnouncementImageCreateFormsSetFactory(queryset=AnnouncementImage.objects.none()),
         })
         return super(AnnouncementCreateView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         form = AnnouncementCreateForm(request.POST, request.FILES)
+        image_formset = AnnouncementImageCreateFormsSetFactory(request.POST, request.FILES)
         if form.is_valid():
             ann = form.save(commit=False)
             ann.owner = request.user
             ann.save()
+
+            if image_formset.is_valid():
+                image_formset.instance = ann
+                image_formset.save()
+
             return redirect(reverse_lazy("announcement-detail", kwargs={'pk': ann.id}))
 
         context = self.get_context_data()

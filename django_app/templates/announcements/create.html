@@ -29,7 +29,8 @@
                         </div>
                     </div>
                     <div class="w-75 input-group mb-3">
-                      <input name="title" type="text" class="form-control" {% if form.title.value %} value="{{ form.title.value }}" {% endif %} id="title-input">
+                        <input name="title" type="text" class="form-control" {% if form.title.value %}
+                               value="{{ form.title.value }}" {% endif %} id="title-input">
                     </div>
 
                     <div class="label-errors-container d-flex flex-wrap align-items-baseline justify-content-start">
@@ -51,9 +52,12 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-text">
-                                <img class="form-check-input mt-0" src="{% static "assets/images/dollar.svg" %}" alt="search">
+                                <img class="form-check-input mt-0" src="{% static "assets/images/dollar.svg" %}"
+                                     alt="search">
                             </div>
-                            <input name="price" {% if form.price.value %} value="{{ form.price.value|stringformat:'s' }}" {% endif %} type="number" min="0" class="form-control price-input" id="id-price-input">
+                            <input name="price" {% if form.price.value %}
+                                   value="{{ form.price.value|stringformat:'s' }}" {% endif %} type="number" min="0"
+                                   class="form-control price-input" id="id-price-input">
                         </div>
                     </div>
                 </div>
@@ -62,18 +66,60 @@
                     <div class="invalid-feedback d-inline w-auto">
                         {{ form.poster.errors }}
                     </div>
-                    <label for="poster-input" class="form-label h4 mt-2 poster-input-label d-flex align-items-center justify-content-center">
-                        <div class="w-25 h-25 d-flex align-items-center justify-content-center poster-input-icon-container">
-                            <img id="id_add_poster_btn" class="w-100" src="{% static "assets/images/upload-camera.svg" %}" alt="Add Poster"/>
-                        </div>
-                    </label>
-                    <input name="poster" type="file" class="form-control d-none" id="poster-input" aria-describedby="title-input-addon" accept="image/*">
-                    <div class="poster-preview-container align-items-center justify-content-center">
-                        <label for="poster-input">
-                            <img id="poster-preview" class="w-100" src="" alt="Poster Preview"/>
+                    <div class="poster-container">
+                        <label for="poster-input" class="form-label h4 mt-2 poster-input-label d-flex flex-column align-items-center justify-content-center">
+                            <div class="w-25 h-25 d-flex align-items-center justify-content-center poster-input-icon-container">
+                                <img id="id_add_poster_btn" class="w-100" src="{% static "assets/images/upload-camera.svg" %}" alt="Add Poster"/>
+                            </div>
+                            <div class="poster-input-label-text">Add Poster</div>
                         </label>
+                        <input name="poster" type="file" class="form-control d-none" id="poster-input" accept="image/*">
+
+                        <div class="preview-container mt-2 position-relative align-items-center justify-content-center">
+                            <img class="poster-image" src="" alt="Poster Preview"/>
+
+                            <div class="remove-edit-container position-absolute w-100 h-100 top-0 start-0">
+                                <button type="button" class="edit-button btn btn-secondary">
+                                    <img class="w-10" src="{% static "assets/images/edit-icon.svg" %}" alt="Change Poster">
+                                </button>
+                                <button type="button" class="ms-1 remove-button btn btn-danger">
+                                    <img class="w-10" src="{% static "assets/images/trash.svg" %}" alt="Remove Poster">
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="additional-images-container d-flex flex-wrap justify-content-start">
+                        <div class="additional-images-title d-flex justify-content-center align-items-baseline mt-3">
+                            <h4 class="w-50 text-center border-bottom">Additional Images</h4>
+                        </div>
+                        <div class="additional-images-management-form-container d-none">
+                            {{ images_formset.management_form }}
+                        </div>
+
+                        <div class="image-form-template">
+                            <label for="id_images-#-file" class="form-label h4 mt-2 image-input-label flex-column align-items-center justify-content-center">
+                                <div class="w-25 h-25 d-flex align-items-center justify-content-center poster-input-icon-container">
+                                    <img class="w-100" src="{% static "assets/images/upload-camera.svg" %}"
+                                         alt="Add Image"/>
+                                </div>
+                                <div class="image-input-label-text">Add</div>
+                            </label>
+                            <input name="images-#-file" id="id_images-#-file" type="file" class="form-control d-none" accept="image/*">
+
+                            <div class="preview-container mt-2 position-relative align-items-center justify-content-center">
+                                <img class="preview-image" src="" alt="Poster Preview"/>
+
+                                <div class="remove-edit-container position-absolute w-100 h-100 top-0 start-0">
+                                    <button type="button" class="ms-1 remove-button btn btn-danger">
+                                        <img class="btn-icon" src="{% static "assets/images/trash.svg" %}" alt="Remove Poster">
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-10 d-flex flex-wrap mt-2 align-items-end justify-content-end buttons-container">
@@ -86,6 +132,7 @@
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
+        <div class="mt-4"></div>
     </div>
 {% endblock %}
 

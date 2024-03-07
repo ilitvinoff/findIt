@@ -66,9 +66,14 @@
 
             <div class="d-flex flex-wrap align-content-center announcements-list-container">
                 {% if profile.id == request.user.id %}
-                    <div class="m-3 add-announcement-btn">
-                        <a href="{% url "announcement-create" %}">
-                            <img src="{% static "assets/images/plus.svg" %}" class="card-img-top" alt="add announcement">
+                    <div class="m-3">
+                        <a class="add-announcement-btn-container" href="{% url "announcement-create" %}">
+                            <div class="add-announcement-btn d-flex flex-column align-items-center justify-content-center">
+                                <div class="dummy"></div>
+                                <img src="{% static "assets/images/plus.svg" %}" class="w-50" alt="add announcement">
+                                <div class="add-announcement-label-text h5">Add Announcement</div>
+                                <div class="dummy"></div>
+                            </div>
                         </a>
                     </div>
                 {% endif %}

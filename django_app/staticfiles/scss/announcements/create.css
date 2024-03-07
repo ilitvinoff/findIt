@@ -2,7 +2,7 @@
   flex: 0 1 5rem;
 }
 
-.poster-input-label {
+.poster-container .poster-input-label {
   width: 70%;
   aspect-ratio: 1/1;
   cursor: pointer;
@@ -10,13 +10,92 @@
   border-radius: 1rem;
   margin: 0 auto;
 }
-
-.poster-preview-container {
+.poster-container .preview-container {
   display: none;
+  min-height: 400px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 1200px) {
+  .poster-container .preview-container {
+    min-height: 300px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .poster-container .preview-container {
+    min-height: 200px;
+  }
+}
+.poster-container .preview-container .remove-edit-container {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.poster-container .preview-container .poster-image {
+  position: absolute;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.poster-container .preview-container:hover .remove-edit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#poster-preview {
+.additional-images-container {
+  width: 100%;
+}
+.additional-images-container .additional-images-title {
+  flex: 0 0 100%;
+}
+.additional-images-container .image-form-template .image-input-label {
+  display: flex;
+  width: 6rem;
+  aspect-ratio: 1/1;
   cursor: pointer;
+  border: 1px solid #555;
+  border-radius: 1rem;
+}
+.additional-images-container .image-form-template:not(:first-child) {
+  margin-left: 1rem;
+}
+.additional-images-container .preview-container {
+  display: none;
+  width: 6rem;
+  height: 6rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
+}
+.additional-images-container .preview-container .remove-edit-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.additional-images-container .preview-container .remove-edit-container button {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+}
+.additional-images-container .preview-container .remove-edit-container button .btn-icon {
+  width: 70%;
+  height: 70%;
+}
+.additional-images-container .preview-container .preview-image {
+  max-width: 6rem;
+  max-height: 6rem;
+  object-fit: contain;
+  border-radius: 0.2rem;
+}
+.additional-images-container .instantiated-image .image-input-label {
+  display: none;
+}
+.additional-images-container .instantiated-image .preview-container {
+  display: flex;
+}
+.additional-images-container .instantiated-image .preview-container:hover .remove-edit-container {
+  display: flex;
+}
+.additional-images-container .instantiated-image:not(:first-child) {
+  margin-left: 1rem;
 }
 
 /*# sourceMappingURL=create.css.map */
