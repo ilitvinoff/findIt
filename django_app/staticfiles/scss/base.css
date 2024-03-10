@@ -58,6 +58,18 @@ main {
   border: 1px solid #76abee;
 }
 
+.btn-danger {
+  background-color: #e34439;
+  color: azure;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+.btn-danger:hover {
+  box-sizing: border-box;
+  background-color: #b33931;
+  border: 1px solid #e34439;
+}
+
 .modal-content {
   background-color: azure;
 }

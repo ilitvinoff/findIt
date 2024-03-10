@@ -64,6 +64,7 @@
   height: 6rem;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 0.2rem;
+  overflow: hidden;
 }
 .additional-images-container .preview-container .remove-edit-container {
   display: none;
@@ -83,7 +84,6 @@
   max-width: 6rem;
   max-height: 6rem;
   object-fit: contain;
-  border-radius: 0.2rem;
 }
 .additional-images-container .instantiated-image .image-input-label {
   display: none;

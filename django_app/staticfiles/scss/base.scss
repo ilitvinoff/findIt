@@ -67,6 +67,19 @@ main {
   }
 }
 
+.btn-danger {
+  background-color: $alert-color;
+  color: $bg-color;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+
+  &:hover {
+    box-sizing: border-box;
+    background-color: $alert-hover;
+    border: 1px solid $alert-color;
+  }
+}
+
 .modal-content {
   background-color: $bg-color;
 }

@@ -3,7 +3,7 @@ from django import forms
 from announcement.models import Announcement, AnnouncementImage, Category
 
 
-class AnnouncementCreateForm(forms.ModelForm):
+class AnnouncementCreateEditForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all(),
                                       error_messages={"required": "Please select the category"})
 
@@ -15,5 +15,9 @@ class AnnouncementCreateForm(forms.ModelForm):
         }
 
 
-AnnouncementImageCreateFormsSetFactory = forms.inlineformset_factory(Announcement, AnnouncementImage, fields=["file"],
-                                                                     max_num=10, absolute_max=20, extra=0)
+AnnouncementImageFormsSetFactory = forms.inlineformset_factory(Announcement, AnnouncementImage, fields=["file"],
+                                                               max_num=10, absolute_max=20, extra=0)
+
+AnnouncementImageUpdateFormsSetFactory = forms.inlineformset_factory(Announcement, AnnouncementImage, fields=["file"],
+                                                                     can_delete=True, max_num=10, absolute_max=20,
+                                                                     extra=0)

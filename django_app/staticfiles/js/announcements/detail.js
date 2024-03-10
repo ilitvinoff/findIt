@@ -1,42 +1,45 @@
-if (document.querySelector('.thumbs-swiper')) {
-    const thumbSwiper = new Swiper(".thumbs-swiper", {
-        slidesPerView: 5,
-        slidesPerGroup: 5,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        multipleActiveThumbs: false,
-        freeMode: true,
-        watchSlidesProgress: true,
-        spaceBetween: 10,
-        direction: "vertical",
-        lazyPreloadPrevNext: 1,
-    });
+function initSwipers() {
+    if (document.querySelector('.thumbs-swiper')) {
+        const thumbSwiper = new Swiper(".thumbs-swiper", {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            multipleActiveThumbs: false,
+            freeMode: true,
+            watchSlidesProgress: true,
+            spaceBetween: 10,
+            direction: "vertical",
+            lazyPreloadPrevNext: 1,
+        });
 
-    const swiper = new Swiper('.main-swiper', {
-        loop: false,
-        allowTouchMove: false,
-        thumbs: {
-            swiper: thumbSwiper,
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true,
-        },
-        lazyPreloadPrevNext: 1,
-    });
-} else {
-    const swiper = new Swiper('.main-swiper', {
-        loop: false,
-        allowTouchMove: false,
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true,
-        },
-        lazyPreloadPrevNext: 1,
-    });
+        const swiper = new Swiper('.main-swiper', {
+            loop: false,
+            allowTouchMove: false,
+            thumbs: {
+                swiper: thumbSwiper,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true,
+            },
+            lazyPreloadPrevNext: 1,
+        });
+    } else {
+        const swiper = new Swiper('.main-swiper', {
+            loop: false,
+            allowTouchMove: false,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true,
+            },
+            lazyPreloadPrevNext: 1,
+        });
+    }
 }
+
 
 const gallerySwiper = new Swiper('.gallery-swiper', {
     navigation: {
@@ -57,12 +60,28 @@ function closeModalPerformerMedia() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    initSwipers();
+    const deleteBtn = $('#delete-btn');
+    const deleteForm = $('#deleteForm');
+    deleteBtn.on("click", function (e) {
+        e.preventDefault()
+        Swal.fire({
+            title: "Delete Announcement",
+            text: `Are you sure you want to delete announcement?`,
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                deleteForm.submit();
+            }
+        })
+    });
+
     $('.main-swiper-slide').on('click', function (e) {
         let index = parseInt(this.attributes['data-index'].value);
         gallerySwiper.slideTo(index, 0, false);
 
         e.preventDefault();
-        // $('.media-modal-image-block img').attr('src', img_src);
         openModalPerformerMedia();
     });
 

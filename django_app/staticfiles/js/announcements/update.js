@@ -1,7 +1,9 @@
 const posterContainer = $('.poster-container');
 const imagesTotalFormsInput = $('#id_images-TOTAL_FORMS');
 const imagesFormsMaxNum = parseInt($('#id_images-MAX_NUM_FORMS').val());
-const currentEmptyFormTemplateEl = {value: null};
+const initialRemoveButtons = $('.remove-button.initial');
+const removedImagesCount = {value: 0};
+const currentEmptyFormTemplateEl = {value: $('.image-form-template')};
 
 function show(element) {
     element.removeClass('d-none');
@@ -15,6 +17,14 @@ function hide(element) {
 
 function getImageInput(parent) {
     return parent.find('input[type="file"]');
+}
+
+function getImageDeleteInput(parent) {
+    return parent.find('input[type="checkbox"]');
+}
+
+function getImageHiddenInputs(parent) {
+    return parent.find('input[type="hidden"]');
 }
 
 function getImagePreviewContainer(parent) {
@@ -40,6 +50,7 @@ function getImageContainerEditBtn(parent) {
 function posterChangeHandler(posterContainer) {
     let label = getImageContainerLabel(posterContainer);
     let input = getImageInput(posterContainer);
+    let deleteInput = getImageDeleteInput(posterContainer);
     let previewContainer = getImagePreviewContainer(posterContainer);
     let previewImgEl = getImagePreviewEl(previewContainer);
     let removeBtn = getImageContainerRemoveBtn(previewContainer);
@@ -50,12 +61,14 @@ function posterChangeHandler(posterContainer) {
         hide(label);
         previewImgEl[0].src = URL.createObjectURL(file);
         show(previewContainer);
+        deleteInput.removeAttr('checked');
     });
 
     removeBtn.on('click', function (e) {
         hide(previewContainer);
         show(label);
         previewImgEl[0].src = "";
+        deleteInput.attr('checked', 'checked');
     });
 
     editBtn.on('click', function (e) {
@@ -65,21 +78,25 @@ function posterChangeHandler(posterContainer) {
 
 function setIdIndexToFormsetInputs(imageContainer, idIndex) {
     let imageInput = getImageInput(imageContainer);
-    let label = getImageContainerLabel(imageContainer);
+    let imageLabel = getImageContainerLabel(imageContainer);
+    let imageDeleteCheckbox = getImageDeleteInput(imageContainer);
+    let formsetHiddenInputs = getImageHiddenInputs(imageContainer);
 
     imageInput.attr('id', `id_images-${idIndex}-file`);
     imageInput.attr('name', `images-${idIndex}-file`);
-    label.attr('for', `id_images-${idIndex}-file`);
+    imageLabel.attr('for', `id_images-${idIndex}-file`);
+    imageDeleteCheckbox.attr('id', `id_images-${idIndex}-DELETE`);
+    formsetHiddenInputs.each(function (index, input) {
+        let $input = $(input);
+        $input.attr('id', `id_images-${idIndex}-${$input.attr('id').split('-')[2]}`);
+        $input.attr('name', `id_images-${idIndex}-${$input.attr('name').split('-')[2]}`);
+    });
 }
 
 function offsetIdIndexToFormsetInputs(imageContainer, offset) {
     let imageInput = getImageInput(imageContainer);
-    let label = getImageContainerLabel(imageContainer);
-
     let idIndex = parseInt(imageInput.attr('id').split('-')[1]) + offset;
-    imageInput.attr('id', `id_images-${idIndex}-file`);
-    imageInput.attr('name', `images-${idIndex}-file`);
-    label.attr('for', `id_images-${idIndex}-file`);
+    setIdIndexToFormsetInputs(imageContainer, idIndex);
 }
 
 function additionalImageAddHandler(templateContainer) {
@@ -100,7 +117,7 @@ function additionalImageAddHandler(templateContainer) {
 
         let currentIdIndex = parseInt(imagesTotalFormsInput.val());
         imagesTotalFormsInput.val(currentIdIndex + 1);
-        if (parseInt(imagesTotalFormsInput.val()) >= imagesFormsMaxNum) {
+        if (parseInt(imagesTotalFormsInput.val()) >= imagesFormsMaxNum + removedImagesCount.value) {
             currentEmptyFormTemplateEl.value.addClass('d-none');
         }
 
@@ -117,7 +134,21 @@ function additionalImageAddHandler(templateContainer) {
         });
 
         let currentIdIndex = parseInt(imagesTotalFormsInput.val());
-        imagesTotalFormsInput.val(currentIdIndex -1);
+        imagesTotalFormsInput.val(currentIdIndex - 1);
+
+        if (currentEmptyFormTemplateEl.value.hasClass('d-none')) {
+            currentEmptyFormTemplateEl.value.removeClass('d-none');
+            currentEmptyFormTemplateEl.value.addClass('d-block');
+        }
+    });
+}
+
+function initialImagesDeleteHandler() {
+    initialRemoveButtons.on('click', function (e) {
+        let checkbox = $(`#${$(this).attr('data-checkbox_id')}`);
+        checkbox.attr('checked', 'checked');
+        checkbox.parent().addClass('d-none');
+        removedImagesCount.value += 1;
 
         if (currentEmptyFormTemplateEl.value.hasClass('d-none')) {
             currentEmptyFormTemplateEl.value.removeClass('d-none');
@@ -127,6 +158,7 @@ function additionalImageAddHandler(templateContainer) {
 }
 
 $(document).ready(function () {
+    initialImagesDeleteHandler();
     posterChangeHandler(posterContainer);
     additionalImageAddHandler($('.image-form-template'));
 });

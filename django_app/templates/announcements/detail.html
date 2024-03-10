@@ -76,6 +76,17 @@
                     </address>
                 </div>
             </div>
+            <div class="row">
+                <div class="remove-edit-container pb-2 w-100 h-100">
+                    <form id="deleteForm" action="{% url "announcement-detail" pk=announcement.pk %}" method="post" class="d-flex flex-nowrap justify-content-start align-items-center">
+                        <a role="button" href="{% url "announcement-update" pk=announcement.pk %}" class="edit-button btn btn-secondary">
+                            Update
+                        </a>
+                        {% csrf_token %}
+                        <button id="delete-btn" type="submit" class="ms-1 delete-button btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

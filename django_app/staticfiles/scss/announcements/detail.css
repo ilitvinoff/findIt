@@ -178,4 +178,8 @@
   opacity: 1;
 }
 
+.content {
+  overflow-wrap: anywhere;
+}
+
 /*# sourceMappingURL=detail.css.map */

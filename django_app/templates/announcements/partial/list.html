@@ -1,11 +1,16 @@
+{% load static %}
+
 {% for ann in announcements_page.object_list %}
-    <div class="card m-3">
-        <a href="{% url "announcement-detail" pk=ann.pk %}" class="d-flex flex-column h-100">
-            <div class="poster-container d-flex justify-content-center align-items-center">
-                <img src="{{ ann.get_image_preview }}" class="card-img-top" alt="Poster">
-            </div>
-            <div class="card-body d-flex flex-column justify-content-between h-100">
-                <div class="w-100">
+    <div id="announcement-{{ ann.pk }}" class="card m-3">
+        <div class="announcement-wrapper d-flex flex-column h-100">
+            <a href="{% url "announcement-detail" pk=ann.pk %}">
+                <div class="poster-container position-relative d-flex justify-content-center align-items-center">
+                    <img src="{{ ann.get_image_preview }}" class="card-img-top poster-image" alt="Poster">
+                    <img src="{% static "/assets/images/eye.svg" %}" class="position-absolute detail-link-icon" alt="Go Detail">
+                </div>
+            </a>
+            <div class="card-body position-relative d-flex flex-column justify-content-between h-100">
+                <div class="w-100 mb-1">
                     <h5 class="card-title w-100">{{ ann.title }}</h5>
                     <p class="card-text w-100">{{ ann.content }}</p>
                 </div>
@@ -14,8 +19,19 @@
                     <strong>${{ ann.get_price }}</strong>
                     <div class="text-center">{{ ann.updated }}</div>
                 </div>
+
+                {% if ann.owner.pk == user.pk %}
+                    <div class="remove-edit-container position-absolute end-0 bottom-0 pb-2 w-100 h-100 flex-nowrap justify-content-center align-items-center">
+                        <a role="button" href="{% url "announcement-update" pk=ann.pk %}" class="edit-button btn btn-secondary">
+                            <img class="w-10" src="{% static "assets/images/edit-icon.svg" %}" alt="Change Poster">
+                        </a>
+                        <button type="button" class="ms-1 remove-button btn btn-danger" hx-post="{% url "announcement-detail" pk=ann.pk %}" hx-swap="delete" hx-target="#announcement-{{ ann.pk }}">
+                            <img class="w-10" src="{% static "assets/images/trash.svg" %}" alt="Remove Poster">
+                        </button>
+                    </div>
+                {% endif %}
             </div>
-        </a>
+        </div>
     </div>
 {% endfor %}
 
