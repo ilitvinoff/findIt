@@ -28,32 +28,32 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
-                        {% if photos %}
-                            <div class="thumbs-swiper-container">
-                                <div class="swiper-button-prev">
-                                    <img src="{% static "/assets/images/up.svg" %}" alt="up">
-                                </div>
-                                <div class="thumbs-swiper swiper">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="{{ announcement.get_image_preview }}" loading="lazy" alt="photo">
-                                            <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
-                                        </div>
+                    {% if photos %}
+                        <div class="thumbs-swiper-container">
+                            <div class="me-1 swiper-button-prev">
+                                <img src="{% static "/assets/images/left.svg" %}" alt="up">
+                            </div>
 
-                                        {% for photo in photos %}
-                                            <div class="swiper-slide">
-                                                <img src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
-                                            </div>
-                                        {% endfor %}
+                            <div class="thumbs-swiper swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="{{ announcement.get_image_preview }}" loading="lazy" alt="photo">
+                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-dark"></div>
                                     </div>
-                                </div>
-                                <div class="swiper-button-next">
-                                    <img src="{% static "/assets/images/down.svg" %}" alt="down">
+
+                                    {% for photo in photos %}
+                                        <div class="swiper-slide">
+                                            <img src="{{ photo.get_image_preview }}" loading="lazy" alt="photo">
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
-                        {% endif %}
-                    </div>
+
+                            <div class="ms-1 swiper-button-next">
+                                <img src="{% static "/assets/images/right.svg" %}" alt="down">
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="row about">
@@ -76,16 +76,15 @@
                     </address>
                 </div>
             </div>
-            <div class="row">
-                <div class="remove-edit-container pb-2 w-100 h-100">
-                    <form id="deleteForm" action="{% url "announcement-detail" pk=announcement.pk %}" method="post" class="d-flex flex-nowrap justify-content-start align-items-center">
-                        <a role="button" href="{% url "announcement-update" pk=announcement.pk %}" class="edit-button btn btn-secondary">
-                            Update
-                        </a>
-                        {% csrf_token %}
-                        <button id="delete-btn" type="submit" class="ms-1 delete-button btn btn-danger">Delete</button>
-                    </form>
-                </div>
+
+            <div class="remove-edit-container pb-2 w-100 h-100">
+                <form id="deleteForm" action="{% url "announcement-detail" pk=announcement.pk %}" method="post" class="d-flex flex-nowrap justify-content-end align-items-center">
+                    <a role="button" href="{% url "announcement-update" pk=announcement.pk %}" class="edit-button btn btn-secondary">
+                        Update
+                    </a>
+                    {% csrf_token %}
+                    <button id="delete-btn" type="submit" class="ms-1 delete-button btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>

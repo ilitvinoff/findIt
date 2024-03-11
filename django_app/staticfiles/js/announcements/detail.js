@@ -1,8 +1,13 @@
 function initSwipers() {
+    let slidesPerView = 4;
+    if (screen.width < 768) {
+        slidesPerView = 2;
+    }
+
     if (document.querySelector('.thumbs-swiper')) {
         const thumbSwiper = new Swiper(".thumbs-swiper", {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
+            slidesPerView: slidesPerView,
+            slidesPerGroup: 1,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -11,7 +16,7 @@ function initSwipers() {
             freeMode: true,
             watchSlidesProgress: true,
             spaceBetween: 10,
-            direction: "vertical",
+            // direction: "vertical",
             lazyPreloadPrevNext: 1,
         });
 
